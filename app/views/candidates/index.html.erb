@@ -1,0 +1,31 @@
+<h1>候选人列表</h1>
+
+<%= icon_link_to "新增候选人", new_candidate_path, "knight" %>
+
+<table class="table">
+	<thead>
+		<tr>
+			<td>投票</td>
+			<td>候選人姓名</td>
+	    <td>政黨</td>
+	    <td>政見</td>
+	    <td>得票數</td>
+	    <td>处理</td>
+		</tr>
+	</thead>
+	<tbody>
+		<% @candidates.each do |candidate| %>
+		<tr>
+		 <td><%= link_to "投给这位", vote_candidate_path(candidate), method: "post", data: { confirm: "确定投给这个人？"}, class:"btn btn-danger btn-xs" %></td>
+		 <td><%= candidate.name %>(年龄: <%= candidate.age %> 岁)</td>
+		 <td><%= candidate.party %></td>
+		 <td><%= candidate.politics %></td>
+		 <td><%= candidate.vote_logs.size %></td>
+		 <td>
+		 	<%= link_to "编辑", edit_candidate_path(candidate) %>
+		 	<%= link_to "删除", candidate_path(candidate), method: "delete", data: { confirm: "确认删除?"} %>
+		 </td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
